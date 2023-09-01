@@ -16,6 +16,8 @@ fi
 TEMP_SCRIPT_FILE=$(mktemp)
 aws s3 cp ${BATCH_SCRIPT_LOCATION} ${TEMP_SCRIPT_FILE}
 
+rsql --version
+
 # execute script
 # envsubst will replace ${COPY_IAM_ROLE_ARN} and ${COPY_IAM_ROLE_ARN} placeholders with actual values
 envsubst < ${TEMP_SCRIPT_FILE} | rsql -D etl
