@@ -170,7 +170,7 @@ export class StepFunctionsStack extends Stack {
         const definition = sfn.Chain.start(parallel).next(vacuumAnalyze).next(successNotification).next(succeed);
 
         this.stateMachine = new sfn.StateMachine(this, 'ServerlessRSQLETLFramework', {
-            definition,
+            definitionBody: sfn.DefinitionBody.fromChainable(definition),
             timeout: Duration.hours(2),
             role: this.stepFunctionsRole,
         });
